@@ -1,0 +1,22 @@
+{
+  "basic": {
+    "name": "NODEINFRA",
+    "country": "KOR",
+    "city": "Seoul",
+    "email": "support@nodeinfra.com",
+    "website": "https://nodeinfra.com/"
+  },
+  "representative": {
+    "logo": {
+      "logo_256": "https://raw.githubusercontent.com/nodeinfra/publicinfo/main/nodeinfra_logo_256.png",
+      "logo_1024": "https://raw.githubusercontent.com/nodeinfra/publicinfo/main/nodeinfra_logo_1024.png"
+    }
+  },
+  "server": {
+    "location": {
+      "country": "KOR",
+      "city": "Seoul"
+    },
+    "server_type": "cloud"
+  }
+}
