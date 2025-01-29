@@ -1,0 +1,16 @@
+#!ipxe
+
+# Basic network setup
+dhcp
+
+# Download Ubuntu 24.04 netboot files
+set base-url http://archive.ubuntu.com/ubuntu/dists/noble/main/installer-amd64/current/images/netboot/ubuntu-installer/amd64
+kernel ${base-url}/vmlinuz
+initrd ${base-url}/initrd.gz
+boot
+
+:install
+# Launch Ubuntu setup
+kernel ${base-url}/linux auto=true hostname=${hostname} domain=${domain} locale=en_US console-setup/layoutcode=us keyboard-configuration/layoutcode=us initrd=initrd.gz quiet ---
+initrd ${base-url}/initrd.gz
+boot
