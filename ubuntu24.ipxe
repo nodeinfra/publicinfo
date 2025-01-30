@@ -1,16 +1,19 @@
 #!ipxe
 
-# Basic network setup
+# Network setup
 dhcp
 
-# Download Ubuntu 24.04 netboot files
+# Ubuntu 24.04 boot files
 set base-url http://archive.ubuntu.com/ubuntu/dists/noble/main/installer-amd64/current/images/netboot/ubuntu-installer/amd64
-kernel ${base-url}/vmlinuz
+kernel ${base-url}/linux
 initrd ${base-url}/initrd.gz
-boot
 
-:install
-# Launch Ubuntu setup
-kernel ${base-url}/linux auto=true hostname=${hostname} domain=${domain} locale=en_US console-setup/layoutcode=us keyboard-configuration/layoutcode=us initrd=initrd.gz quiet ---
-initrd ${base-url}/initrd.gz
+# Setup parameters
+kernel-param auto=true
+kernel-param hostname=ubuntu24
+kernel-param passwd/user-fullname=ubuntu
+kernel-param passwd/username=ubuntu
+kernel-param passwd/user-password-crypted=!
+kernel-param preseed/late_command="mkdir -p /target/home/ubuntu/.ssh; echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPCKFmYt6BMoIN9zPYUzlcesAltQywn1VCaxvIYBRPjV tmp-ipxe' > /target/home/ubuntu/.ssh/authorized_keys; chmod 700 /target/home/ubuntu/.ssh; chmod 600 /target/home/ubuntu/.ssh/authorized_keys; chown -R ubuntu:ubuntu /target/home/ubuntu/.ssh; in-target usermod -aG sudo ubuntu; echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu; chmod 440 /target/etc/sudoers.d/ubuntu; sed -i 's/^#*PasswordAuthentication.*/PasswordAuthentication no/' /target/etc/ssh/sshd_config"
+
 boot
